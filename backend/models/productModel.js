@@ -5,7 +5,7 @@ const reviewSchema = mongoose.Schema({
     rating: { type: Number, required: true },
     comment: { type: String, required: true }
 }, {
-    timeStamps: true
+    timestamps: true
 });
 
 const productSchema = mongoose.Schema({
@@ -57,7 +57,7 @@ const productSchema = mongoose.Schema({
         default: 0
     }
 }, {
-    timeStamps: true
+    timestamps: true
 });
 
 const Product = mongoose.model('Product', productSchema);
