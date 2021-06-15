@@ -13,6 +13,7 @@ import CartScreen from './screens/CartScreen';
 import { loadUser } from './actions/userActions';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
+import ProfileScreen from './screens/ProfileScreen';
 
 const App = () => {
   
@@ -28,6 +29,7 @@ const App = () => {
       <main className="py-3">
         <Container>
           <Route path='/register' component={RegisterScreen} />
+          <Route path='/profile' component={ProfileScreen} />
           <Route path='/login' component={LoginScreen} />
           <Route path="/" component={HomeScreen} exact />
           <Route path="/product/:id" component={ProductScreen} />

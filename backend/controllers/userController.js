@@ -79,6 +79,39 @@ const getUserProfile = asyncHandler(async (req, res) => {
     }
 });
 
+// @desc    Update User Profile
+// @route   PUT /api/users/profile
+// @access  Private
+const updateUserProfile = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id);
+    if(user){
+        user.name = req.body.name || user.name;
+        user.email = req.body.email || user.email;
+        if(req.body.password){
+            user.password = req.body.password
+        }
+
+        const updatedUser = await user.save();
+
+        res.json({
+            _id: updatedUser._id,
+            name: updatedUser.name,
+            email: updatedUser.email,
+            isAdmin: updatedUser.isAdmin,
+        });
+
+    }else{
+        res.status(404);
+        throw new Error('User Not Found');
+    }
+});
+
+// const logOutUser = (req, res) => {
+//     res.cookie('token', '', {httpOnly: true, maxAge: 0});
+//     res.send('Success');
+// };
+
+
 const logOutUser = (req, res) => {
     res.cookie('token', '', {httpOnly: true, maxAge: 0});
     res.send('Success');
@@ -119,4 +152,4 @@ const getJwt = (req, res) => {
     }
 }
 
-export { authUser, getJwt, getUserProfile, registerUser, getCredentials, logOutUser };
+export { authUser, getJwt, getUserProfile, registerUser, getCredentials, logOutUser, updateUserProfile };
